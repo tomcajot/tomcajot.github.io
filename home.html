@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BKB</title>
+</head>
+<body onload="generateKeyboard()">
+    <input type="text" id="textfield">
+    <div id="keyboard"></div>
+    <div id="actions"></div>
+</body>
+</html>
+
+<script>
+
+    let alphabet = '0123456789abcdefghijklmnopqrstuvwxyz?';
+    let keys = '';
+    let space = ' ';
+
+    function generateKeyboard() {
+        for (let i = 0; i < alphabet.length; i++) {
+            keys += "<button id='key' onclick='writeText(alphabet[" + i + "])'>" + alphabet[i] + "</button>";
+        }
+        document.getElementById("actions").innerHTML = "<button id='delete' onclick='deleteText()'>DELETE</button><button id='space' onclick='writeText()'>SPACE</button><button id='space' onclick='resetText()'>RESET</button>";
+        document.getElementById("keyboard").innerHTML = keys;
+    }
+
+    function writeText(input) {
+        if (input == null) {
+            document.getElementById('textfield').value += ' ';
+        }else {
+            document.getElementById('textfield').value += input;
+        }
+    }
+
+    function deleteText() {
+        let currenText = document.getElementById('textfield').value;
+        document.getElementById('textfield').value = currenText.slice(0, -1);
+    }
+
+    function resetText() {
+        document.getElementById('textfield').value = '';
+    }
+
+</script>
+
+<style>
+
+    #textfield {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        font-size: 32px;
+        box-sizing: border-box;
+    }
+
+    #keyboard {
+        text-align: center;
+    }
+
+    #actions {
+        text-align: center;
+    }
+
+    #key {
+        font-size: 32px;
+        width: 100px;
+        height: 100px;
+        margin: 5px;
+    }
+
+    #space, #delete, #reset {
+        width: 30%;
+        height: 100px;
+        font-size: 32px;
+        margin: 5px;
+    }
+</style>
